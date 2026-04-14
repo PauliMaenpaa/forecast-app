@@ -24,6 +24,7 @@ Koska `pnpm create vuetify@latest` pakottaa käyttämään TypeScript, projekti 
 ```Bash
 pnpm add vuetify@latest
 pnpm add -D sass vite-plugin-vuetify
+pnpm add @mdi/font
 ```
 
 ## 4. Asennetut lisäosat:
@@ -31,6 +32,8 @@ pnpm add -D sass vite-plugin-vuetify
 sass: Tarvitaan Vuetifyn tyylien kääntämiseen.
 
 vite-plugin-vuetify: Mahdollistaa komponenttien automaattisen latauksen (tree-shaking).
+
+@mdi/font ikonit
 
 ## 5. Konfigurointi
 
