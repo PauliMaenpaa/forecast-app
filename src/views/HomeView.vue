@@ -1,6 +1,6 @@
 <template>
-    <v-container class="border fill-height">
-        <h1>Home</h1>
+    <v-container>
+        <h1 class="text-headline-large">Home</h1>
     </v-container>
 
 </template>

@@ -25,6 +25,7 @@ Koska `pnpm create vuetify@latest` pakottaa käyttämään TypeScript, projekti 
 pnpm add vuetify@latest
 pnpm add -D sass vite-plugin-vuetify
 pnpm add @mdi/font
+pnpm add pinia
 ```
 
 ## 4. Asennetut lisäosat:
@@ -34,6 +35,8 @@ sass: Tarvitaan Vuetifyn tyylien kääntämiseen.
 vite-plugin-vuetify: Mahdollistaa komponenttien automaattisen latauksen (tree-shaking).
 
 @mdi/font ikonit
+
+pinia tilanhallintaan
 
 ## 5. Konfigurointi
 
@@ -57,16 +60,37 @@ vuetify({ autoImport: true }), // Automaattinen komponenttien lataus
 src/main.js:
 
 ```JavaScript
-import { createApp } from 'vue'
-import App from './App.vue'
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import {createApp} from "vue";
+import "./style.css";
+import App from "./App.vue";
 
-const vuetify = createVuetify()
+// Pinia Store
+import {createPinia} from "pinia";
 
-createApp(App)
-.use(vuetify)
-.mount('#app')
+import "@mdi/font/css/materialdesignicons.css";
+
+// Vuetify
+import {createVuetify} from "vuetify";
+import "vuetify/styles";
+import {aliases, mdi} from "vuetify/iconsets/mdi";
+
+// Reititin (Tarkista että polku on oikein tiedostoosi nähden)
+import router from "./router/routes";
+
+const pinia = createPinia();
+
+const vuetify = createVuetify({
+  icons: {
+    defaultSet: "mdi",
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+});
+
+// Lisää .use(router) tähän ketjuun
+createApp(App).use(vuetify).use(router).use(pinia).mount("#app");
 ```
 
 ## 6. Käynnistys
