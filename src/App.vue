@@ -1,5 +1,7 @@
 <script setup>
+
 import NavigationComponent from "./components/NavigationComponent.vue";
+
 </script>
 <template>
 	<v-app>

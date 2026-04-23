@@ -1,12 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import { useGeoLocationStore } from "../stores/locationStore.js";
+import { useForecastStore } from "../stores/forecastStore.js"
 
 const locationStore = useGeoLocationStore();
+const forecastStore = useForecastStore();
 
 const handleSearch = () => {
     locationStore.fetchLocations(locationStore.searchQuery);
 };
+
 </script>
 
 <template>
@@ -49,8 +52,34 @@ const handleSearch = () => {
             <p class="text-body-large">
                 Selected: {{ locationStore.selectedLocation.name }} <br>
                 Latitude: {{ locationStore.selectedLocation.latitude }} <br>
-                Latitude: {{ locationStore.selectedLocation.longitude }}
+                Longitude: {{ locationStore.selectedLocation.longitude }}
             </p>
         </v-row>
+
+        <v-row v-if="forecastStore.rawForecast && forecastStore.rawForecast.daily">
+            <v-col cols="12">
+                <h3>7 Day Precipitation Forecast</h3>
+
+                <v-card variant="outlined"
+                        class="mb-2"
+                        v-for="(amount, index) in forecastStore.rawForecast.daily.precipitation_sum"
+                        :key="index">
+                    <v-card-text class="d-flex justify-space-between">
+                        <span><strong>{{ locationStore.selectedLocation.name }}</strong></span>
+                        <span><strong>{{ forecastStore.rawForecast.daily.time[index] }}</strong></span>
+                        <span>Sademäärä: <strong>{{ amount }} mm</strong></span>
+                        <span>Todennäköisyys: {{ forecastStore.rawForecast.daily.precipitation_probability_max[index]
+                        }}%</span>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+
+        <v-row v-else>
+            <v-col>
+                <p class="text-grey">Select a city to see the precipitation forecast.</p>
+            </v-col>
+        </v-row>
+
     </v-container>
 </template>
