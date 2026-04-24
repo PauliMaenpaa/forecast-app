@@ -4,13 +4,13 @@ import {getForecast} from "../services/forecastApi";
 export const useForecastStore = defineStore("Forecast", {
   state: () => ({
     rawForecast: null,
-    loading: false,
+    isLoading: false,
     error: null,
   }),
 
   actions: {
     async fetchForecast(lat, lon) {
-      this.loading = true;
+      this.isLoading = true;
       this.error = null;
 
       try {
@@ -23,7 +23,7 @@ export const useForecastStore = defineStore("Forecast", {
         this.error = "Couldn fetch forecast data";
         console.log(e);
       } finally {
-        this.loading = false;
+        this.isLoading = false;
       }
     },
   },
