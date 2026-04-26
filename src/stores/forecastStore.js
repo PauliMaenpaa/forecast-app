@@ -1,5 +1,7 @@
 import {defineStore} from "pinia";
 import {getForecast} from "../services/forecastApi";
+import {useGeoLocationStore} from "./locationStore";
+import {mdiLongitude} from "@mdi/js";
 
 export const useForecastStore = defineStore("Forecast", {
   state: () => ({
@@ -25,6 +27,15 @@ export const useForecastStore = defineStore("Forecast", {
       } finally {
         this.isLoading = false;
       }
+    },
+
+    async initDefaultLocationForecast() {
+      const locationStore = useGeoLocationStore();
+
+      await this.fetchForecast(
+        locationStore.selectedLocation.latitude,
+        locationStore.selectLocation.longitude,
+      );
     },
   },
 });

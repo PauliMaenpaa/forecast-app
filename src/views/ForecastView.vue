@@ -6,6 +6,8 @@ import { useForecastStore } from "../stores/forecastStore.js"
 const locationStore = useGeoLocationStore();
 const forecastStore = useForecastStore();
 
+forecastStore.initDefaultLocationForecast();
+
 const handleSearch = () => {
     locationStore.fetchLocations(locationStore.searchQuery);
 };
@@ -18,7 +20,7 @@ const handleSearch = () => {
             <v-col cols="12"
                    md="8"
                    lg="6">
-                <h1 class="text-h4 font-weight-bold mb-6 text-primary">Weather Forecast</h1>
+                <h1 class="text-h4 font-weight-bold mb-6">Weather Forecast</h1>
 
                 <v-card elevation="2"
                         rounded="lg"
@@ -26,6 +28,7 @@ const handleSearch = () => {
                     <v-card-text class="pa-4">
                         <v-text-field v-model="locationStore.searchQuery"
                                       :loading="locationStore.isLoading"
+                                      color="primary"
                                       label="Search city..."
                                       variant="filled"
                                       prepend-inner-icon="mdi-city"
@@ -69,7 +72,9 @@ const handleSearch = () => {
                         <v-icon icon="mdi-weather-rainy"
                                 class="mr-2"
                                 color="primary"></v-icon>
-                        <h3 class="text-h5">7-Day Precipitation</h3>
+                        <h3 class="text-h5">7-Day Precipitation in <span class="text-primary">{{
+                            locationStore.selectedLocation.name
+                                }}</span></h3>
                     </div>
 
                     <v-card v-for="(amount, index) in forecastStore.rawForecast.daily.precipitation_sum"
@@ -84,9 +89,6 @@ const handleSearch = () => {
                                         {
                                             weekday: 'long', day: 'numeric', month: 'numeric'
                                         }) }}
-                                </div>
-                                <div class="text-subtitle-1">
-                                    {{ locationStore.selectedLocation.name }}
                                 </div>
                             </div>
 

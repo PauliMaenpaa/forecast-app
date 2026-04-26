@@ -8,11 +8,11 @@
                    md="8"
                    lg="6"
                    class="text-center">
-                <v-icon icon="mdi-weather-cloudy"
-                        size="48"
+                <v-icon icon="mdi-weather-partly-cloudy"
+                        size="64"
                         color="primary"
                         class="mb-4"></v-icon>
-                <h1 class="text-h3 font-weight-light mb-2">Weather Forecast</h1>
+                <h1 class="text-h3 font-weight-bold mb-4">Weather Forecast</h1>
                 <p class="text-body-1 text-medium-emphasis">
                     Simple precipitation tracking for cities worldwide.
                 </p>
