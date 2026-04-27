@@ -36,9 +36,4 @@ export const useGeoLocationStore = defineStore("Geolocation", {
       await forecastStore.fetchForecast(location.latitude, location.longitude);
     },
   },
-  // state ja actions lisäksi myös getters, jotka ovat computed properties:
-  //
-  //   getters: {
-  //     doubleCount: (state) => state.count * 2,
-  //   }
 });
