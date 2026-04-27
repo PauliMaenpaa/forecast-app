@@ -2,23 +2,23 @@
 
 Application displays a 7-day precipitation forecast based on user search.
 
-## Tech Stack:
+## Tech Stack
 - **Vue 3** (Vite)
 - **Vuetify 3** (Material Design)
 - **Pinia** (State management)
 - **Open-Meteo API** (Weather and location data)
 
-## Requirements:
+## Requirements
 
 - **Node.js** (v22.21.1 or newer)
 - **pnpm** (package manager)
 
-## How to run:
+## How to run
 
 ### 1. Clone repository
 
 ```bash
-git clone [https://github.com/PauliMaenpaa/forecast-app](https://github.com/PauliMaenpaa/forecast-app)
+git clone https://github.com/PauliMaenpaa/forecast-app
 ```
 
 ### 2. Move to project folder
