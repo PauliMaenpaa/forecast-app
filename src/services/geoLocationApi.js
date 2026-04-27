@@ -1,23 +1,29 @@
 export async function getGeoLocation(searchQuery) {
   try {
-    // 1. Tehdään haku
+    // 1. Haku 
     const response = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=10&language=en&format=json`,
     );
 
-    // 2. Tarkistetaan, onko vastaus OK
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // 3. Muutetaan vastaus JSON-muotoon
     const data = await response.json();
 
-    // 4. Palautetaan tulokset (Open-Meteo palauttaa ne yleensä 'results'-taulukossa)
-    return data.results || [];
+    // 2. Järjestetään tulokset asukasluvun mukaan
+    if (data.results && data.results.length > 0) {
+      return data.results.sort((a, b) => {
+        // Jos puuttuu, niin nolla
+        const popA = a.population || 0;
+        const popB = b.population || 0;
+        return popB - popA; // Suurempi asukasluku ensin
+      });
+    }
+
+    return [];
   } catch (e) {
     console.error("Error fetching geolocation data:", e);
-    // Palautetaan tyhjä taulukko tai heitetään virhe eteenpäin storelle
     return [];
   }
 }

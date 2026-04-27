@@ -44,7 +44,7 @@ const handleSearch = () => {
                                 border-t>
                             <v-list-item v-for="city in locationStore.searchResults"
                                          :key="city.id"
-                                         @click="locationStore.selectLocation(city)"
+                                         @click="locationStore.selectLocation(city);"
                                          hover>
                                 <template v-slot:prepend>
                                     <v-icon icon="mdi-map-marker-outline"
@@ -85,18 +85,14 @@ const handleSearch = () => {
                         <v-card-text class="d-flex justify-space-between align-center py-3">
                             <div>
                                 <div class="text-caption text-uppercase font-weight-bold text-grey">
-                                    {{ new Date(forecastStore.rawForecast.daily.time[index]).toLocaleDateString('fi-FI',
-                                        {
-                                            weekday: 'long', day: 'numeric', month: 'numeric'
-                                        }) }}
+                                    {{ forecastStore.formattedDailyDates[index] }}
                                 </div>
                             </div>
 
-                            <v-divider vertical
-                                       class="mx-4"></v-divider>
-
                             <div class="text-right">
-                                <div class="text-h6 text-primary">{{ amount }} mm</div>
+                                <div class="
+                                 text-h6
+                                 text-primary">{{ amount }} mm</div>
                                 <div class="text-caption">
                                     Prob: {{ forecastStore.rawForecast.daily.precipitation_probability_max[index] }}%
                                 </div>

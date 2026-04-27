@@ -15,7 +15,7 @@ export const useGeoLocationStore = defineStore("Geolocation", {
     isLoading: false,
   }),
 
-  // Nämä ovat tilanhallintaan liittyviä metodeja metodeja
+  // Nämä ovat tilanhallintaan liittyviä metodeja
   actions: {
     async fetchLocations(query) {
       this.isLoading = true;
@@ -30,7 +30,7 @@ export const useGeoLocationStore = defineStore("Geolocation", {
     async selectLocation(location) {
       this.selectedLocation = location;
       this.searchResults = [];
-      this.searchQuery = location.name;
+      this.searchQuery = '';
 
       const forecastStore = useForecastStore();
       await forecastStore.fetchForecast(location.latitude, location.longitude);

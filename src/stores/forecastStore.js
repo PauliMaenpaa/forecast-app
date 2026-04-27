@@ -10,6 +10,28 @@ export const useForecastStore = defineStore("Forecast", {
     error: null,
   }),
 
+getters: {
+  formattedDailyDates: (state) => {
+    if (!state.rawForecast?.daily?.time) return [];
+
+    return state.rawForecast.daily.time.map((dateString) => {
+      const date = new Date(dateString);
+      
+      // Pelkkä viikonpäivä
+      const dayName = new Intl.DateTimeFormat('fi-FI', { weekday: 'long' }).format(date);
+      
+      // 2. Päivä ja kuukausi
+      const dayAndMonth = new Intl.DateTimeFormat('fi-FI', { 
+        day: 'numeric', 
+        month: 'numeric' 
+      }).format(date);
+
+      // 3. Yhdistetään
+      return `${dayName} ${dayAndMonth}`;
+    });
+  }
+},
+
   actions: {
     async fetchForecast(lat, lon) {
       this.isLoading = true;
@@ -19,10 +41,9 @@ export const useForecastStore = defineStore("Forecast", {
         const data = await getForecast(lat, lon);
         if (data) {
           this.rawForecast = data;
-          console.log("Forecast data stored");
         }
       } catch (e) {
-        this.error = "Couldn fetch forecast data";
+        this.error = "Could not fetch forecast data";
         console.log(e);
       } finally {
         this.isLoading = false;
