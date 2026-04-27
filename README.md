@@ -5,6 +5,7 @@ Application displays a 7-day precipitation forecast based on user search.
 ## Tech Stack
 - **Vue 3** (Vite)
 - **Vuetify 3** (Material Design)
+- **Vue Router** (Routing)
 - **Pinia** (State management)
 - **Open-Meteo API** (Weather and location data)
 
